@@ -6,7 +6,10 @@
     <title>gsgssssss1</title>
     <meta property="og:title" content="Congratulations 🎓" />
     <meta property="og:description" content="Special card just for you! ❤️" />
-    <meta property="og:image" content="https://veeanty.github.io/gsgssssss1/bunga.png" />
+    <meta
+      property="og:image"
+      content="https://veeanty.github.io/gsgssssss1/bunga.png"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://veeanty.github.io/gsgssssss1/" />
 
@@ -35,7 +38,7 @@
         color: #fff;
         position: relative;
         overflow-x: hidden;
-        overflow-y: auto; /* biarkan scroll vertikal tetap ada jika diperlukan */
+        overflow-y: auto;
         text-align: center;
       }
 
@@ -143,8 +146,7 @@
 
       .slide-1 {
         position: absolute;
-        top: auto;
-        bottom: 6%; /* ubah dari 10% jadi 6% */
+        bottom: 6%;
         left: 50%;
         transform: translateX(-50%);
         font-size: clamp(0.8rem, 2.5vw, 1em);
@@ -179,7 +181,29 @@
       #play-button:hover {
         background: #ff1493;
       }
-      
+
+      .text-extra {
+        font-size: 0.9em;
+        margin-top: 10px;
+        z-index: 1;
+        opacity: 1;
+        max-width: 600px;
+        line-height: 1.6;
+        text-align: center;
+        white-space: pre-wrap; /* biar spasi dan baris baru dipertahankan */
+      }
+
+      .text-extra span {
+        opacity: 0;
+        display: inline-block;
+        animation: fadeIn 7s ease forwards; /* durasi fade lebih lama */
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
     </style>
   </head>
   <body>
@@ -199,8 +223,9 @@
         ✨, charming 💖, classy 🎩, smartss 🤓, all in one in uuuu ❤️
       </div>
     </div>
-
+    <div class="text-extra" id="extraText"></div>
     <div class="text-bottom">I'm also happy just like you ❤️.</div>
+
 
     <button id="play-button">Play Me</button>
 
@@ -245,11 +270,34 @@
           .play()
           .then(() => {
             playBtn.style.display = "none";
+            showExtraText();
           })
           .catch((err) => {
             console.error("Error playing audio:", err);
           });
       });
+
+      function showExtraText() {
+        const extraText = document.getElementById("extraText");
+        const text = `Weewww ainsss akhirnyaa kamu sampai juga wehh di titik ini omgaaa Selamaatts  Munaqosion🔥 Perjalanan yang gak gampang, full perjuangan, tangis, senang, gadang terosss sama semua effort yang diberikan buat perkuliahn sekrang dah mulai terbayarkan. 
+Kamu pasti merasa lega dan aku juga ikut seneng banget liat kamu bisa sejauh ini.
+
+Tetep mangattss, jangan remehin diri sendiri. Kmu hebats dan pantas akan semua hal baik yang kamu capai, walaupun lom selesai sie tapi kamu dah buktiin kalo kamu bisa lewatin semua ini. ❤️❤️❤️
+
+Semoga semua lancar yah sampai akhirnya until we meet  4444
+
+P.S Rintangan dari Cyur untuk Ainiw S.Pd  Aku sayang kamu`;
+
+        const words = text.split(" ");
+        extraText.innerHTML = "";
+
+        words.forEach((word, index) => {
+          const span = document.createElement("span");
+          span.textContent = word + " ";
+          span.style.animationDelay = `${index * 0.25}s`; // Lebih lambat: 0.25 detik per kata
+          extraText.appendChild(span);
+        });
+      }
 
       // Show first text on page load
       window.addEventListener("DOMContentLoaded", () => {
