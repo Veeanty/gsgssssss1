@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gsgssssss1</title>
+
+    <link
+      rel="icon"
+      href="https://cdn-icons-png.flaticon.com/512/833/833472.png"
+      type="image/png"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #8b0000, #4b0082);
+        background-attachment: fixed;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        z-index: 0;
+      }
+
+      .flower-bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 600px;
+        height: auto;
+        transform: translate(-50%, -50%);
+        opacity: 0.15;
+        z-index: 0.5;
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      body::before {
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 105, 180, 0.3);
+        top: 10%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+      }
+
+      body::after {
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 0, 0, 0.2);
+        bottom: 5%;
+        right: 20%;
+        transform: translate(50%, 50%);
+      }
+
+      .text-top {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin-bottom: 20px;
+        z-index: 1;
+      }
+
+      .card {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        aspect-ratio: 1 / 1;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+        background: #fff;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+      }
+
+      .slide.active {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      .text-overlay {
+        position: absolute;
+        color: white;
+        font-weight: bold;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+        pointer-events: none;
+        user-select: none;
+        z-index: 2;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.8s ease;
+      }
+
+      .text-overlay.fade-in {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .slide-0 {
+        bottom: 30px;
+        left: 20px;
+        font-size: 1.2em;
+        text-align: left;
+      }
+
+      .slide-1 {
+        position: absolute;
+        top: auto;
+        bottom: 6%; /* ubah dari 10% jadi 6% */
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: clamp(0.8rem, 2.5vw, 1em);
+        text-align: center;
+        max-width: 100%;
+        max-height: 40%;
+        overflow: auto;
+        line-height: 1.4;
+      }
+
+      .text-bottom {
+        font-size: 0.9em;
+        margin-top: 20px;
+        z-index: 1;
+        opacity: 0.8;
+      }
+
+      #play-button {
+        margin-top: 20px;
+        padding: 12px 24px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 8px;
+        background: #ff69b4;
+        color: white;
+        cursor: pointer;
+        z-index: 10;
+        box-shadow: 0 4px 8px rgba(255, 105, 180, 0.6);
+        transition: background-color 0.3s ease;
+      }
+
+      #play-button:hover {
+        background: #ff1493;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="bunga.png" class="flower-bg" alt="Background Flower" />
+
+    <div class="text-top">Congratulations on officially becoming S.Pd 🎓</div>
+
+    <div class="card" onclick="nextSlide()">
+      <img src="sayangaku2.jpg" class="slide active" alt="Photo 1" />
+      <img src="sayangaku1.jpg" class="slide" alt="Photo 2" />
+      <div class="text-overlay slide-0" id="text0">
+        AAAAAAAAAAHHHHHHH HEBAATTT SANGGATTSS BANGGA WEEH AKUU
+      </div>
+      <div class="text-overlay slide-1" id="text1">
+        sksksk dasar pretty 😍, gorgeous 💃, admirable 🌟, adorable 🥰, alluring
+        💫, angelic 👼, appeealing 😉, beauteous 🌷, bewitching 🧙‍♀️, captivating
+        ✨, charming 💖, classy 🎩, smartss 🤓, all in one in uuuu ❤️
+      </div>
+    </div>
+
+    <div class="text-bottom">I'm also happy just like you ❤️.</div>
+
+    <button id="play-button">Play Me</button>
+
+    <audio id="bg-music" src="backsound.mp3" loop></audio>
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      const text0 = document.getElementById("text0");
+      const text1 = document.getElementById("text1");
+      const bgMusic = document.getElementById("bg-music");
+      const playBtn = document.getElementById("play-button");
+      let currentIndex = 0;
+
+      bgMusic.volume = 0.3;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active");
+          if (i === index) slide.classList.add("active");
+        });
+
+        [text0, text1].forEach((el) => {
+          el.classList.remove("fade-in");
+        });
+
+        setTimeout(() => {
+          if (index === 0) {
+            text0.classList.add("fade-in");
+          } else {
+            text1.classList.add("fade-in");
+          }
+        }, 50);
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+      }
+
+      playBtn.addEventListener("click", () => {
+        bgMusic
+          .play()
+          .then(() => {
+            playBtn.style.display = "none";
+          })
+          .catch((err) => {
+            console.error("Error playing audio:", err);
+          });
+      });
+
+      // Show first text on page load
+      window.addEventListener("DOMContentLoaded", () => {
+        text0.classList.add("fade-in");
+      });
+    </script>
+  </body>
+</html>
